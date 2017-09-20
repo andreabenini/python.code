@@ -10,7 +10,7 @@ def ExecCommand(Command=[], DevNull=True):
     Process.wait()
     return Process.communicate()[0], Process.returncode
 #
-# Output, ReturnCode = Config.ExecCommand('systemctl daemon-reload')
+# Output, ReturnCode = ExecCommand('systemctl daemon-reload')
 # if ReturnCode is not 0:
 #     print('something went wrong (%s)' % ReturnCode)
 # else:
