@@ -1,4 +1,3 @@
-
 #
 # Ben's daemon class, python 3.x. - Simple but effective Python Daemon
 #
@@ -33,7 +32,7 @@ import sys, os, time, atexit, signal
 #
 class simpleDaemon:
 
-    # Costruttore
+    # Constructor
     def __init__(self, name='', pidfile='', stdin='/dev/null', stdout='/dev/null', stderr='/dev/null'):
         self.stdin   = stdin
         self.stdout  = stdout
@@ -84,7 +83,7 @@ class simpleDaemon:
             sys.exit(1)
         # Start the daemon
         self.__daemonize()
-        self.run()
+        self.daemonStart()
 
 
     # STOP - Stop the daemon
@@ -96,6 +95,8 @@ class simpleDaemon:
                 if silent: return       # Daemon not running ? It's not a problem
                 sys.stderr.write("{0} is not running\n".format(self.name))
                 sys.exit(1)
+            # Run user function hook
+            self.daemonStop()
             # Try killing the daemon process
             while True:
                 os.kill(self.pid, signal.SIGTERM)
@@ -118,8 +119,12 @@ class simpleDaemon:
         self.start()
 
 
-    # RUN (virtual) This method must be overridden in your own subclass
-    def run(self):
+    # DAEMON START (virtual) This method must be overridden in your own subclass
+    def daemonStart(self):
+        raise NotImplementedError
+
+    # DAEMON STOP  (virtual) This method must be overridden in your own subclass
+    def daemonStop(self):
         raise NotImplementedError
 
 
@@ -134,9 +139,9 @@ class simpleDaemon:
             sys.stderr.write('{0} daemon fork({1}) failed: {2}\n'.format(self.name, attempt, err))
             sys.exit(1)
 
-    # Deamonize method with UNIX double fork mechanism
+    # Deamonize method with UNIX double fork black magic ["Advanced Programming in the UNIX Environment" (ISBN 0201563177)]
     def __daemonize(self):
-        self.__fork(1)                          # First Fork    [UNIX double-fork magic, "Advanced Programming in the UNIX Environment" (ISBN 0201563177)
+        self.__fork(1)                          # First Fork
         # decouple from parent environment
         try: os.chdir('/')
         except OSError as err:
@@ -144,7 +149,6 @@ class simpleDaemon:
             sys.exit(1)
         os.setsid()
         os.umask(0)
-
         self.__fork(2)                          # Second Fork
 
         # redirect standard file descriptors (stdin,stdout,stderr)
