@@ -16,3 +16,8 @@ def ExecCommand(Command=[], DevNull=True):
 # else:
 #     print('Output: %s' % Output)
         
+# Assorted filesystem functions
+shutil.rmtree(Dir, True)                # Recursive delete
+shutil.copytree(Template, Dir, True)    # Recursive copy
+shutil.copytree(SourceDir, DestDir)
+shutil.copyfile(FileSource, FileDestination)
