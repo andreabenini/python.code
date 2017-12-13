@@ -30,3 +30,9 @@ def TCP_ClientSpawn(self, client, address):
             client.send((Command+'\n').encode('UTF-8'))
         else:
             raise Exception('Client disconnected [Command:%s]' % Command)
+
+
+# Close an opened socket
+def __SocketClose(self, Socket):
+    Socket.shutdown(socket.SHUT_RDWR)
+    Socket.close()
