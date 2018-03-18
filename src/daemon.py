@@ -5,7 +5,7 @@
 #           https://github.com/andreabenini/python.code
 #
 # @license  GPLv3
-#           Copyright (C) 2017  Andrea Benini
+#           Copyright (C) 2018  Andrea Benini
 #
 #           This program is free software; you can redistribute it and/or modify
 #           it under the terms of the GNU General Public License as published by
@@ -25,11 +25,17 @@
 # @see      Drop me a note if you want, comments welcomed, slightly modified and improved version, credits to:
 #           http://web.archive.org/web/20170313055313/http://www.jejik.com:80/files/examples/daemon3x.py
 #
-import sys, os, time, atexit, signal
+import os
+import sys
+import time
+import atexit
+import signal
 
 #
 # common daemon class. Subclassed below
 #
+
+
 class simpleDaemon:
 
     # Constructor
@@ -40,13 +46,14 @@ class simpleDaemon:
         self.name    = name
         self.pid     = None
         self.pidfile = pidfile
+        self.signal  = signal.SIGQUIT
 
 
     # PID GET - Get pid of the running process
     def pidGet(self):
         if self.pid is None:
             try:
-                with open(self.pidfile,'r') as pf:
+                with open(self.pidfile, 'r') as pf:
                     pid = int(pf.read().strip())
                 pf.close()
                 self.pid = pid if self.__pidDetect(pid) else None
@@ -69,7 +76,7 @@ class simpleDaemon:
     def pidCreate(self):
         self.pid = os.getpid()
         with open(self.pidfile, 'w+') as f:
-            f.write(str(self.pid)+'\n')
+            f.write(str(self.pid) + '\n')
 
     # PID DELETE - Delete pid file
     def pidDelete(self):
@@ -83,7 +90,10 @@ class simpleDaemon:
             sys.exit(1)
         # Start the daemon
         self.__daemonize()
-        self.daemonStart()
+        IsMethodDefined = getattr(self, "daemonSignal", None)
+        if callable(IsMethodDefined):
+            signal.signal(self.signal, self.daemonSignal)
+        self.daemonStart()              # Endless loop must be placed here
 
 
     # STOP - Stop the daemon
@@ -91,16 +101,16 @@ class simpleDaemon:
         try:
             # Get daemon PID
             self.pidGet()
-            if not self.pid:
-                if silent: return       # Daemon not running ? It's not a problem
-                sys.stderr.write("{0} is not running\n".format(self.name))
-                sys.exit(1)
+            if not self.pid:                            # Daemon not running ? Not a problem
+                if not silent:
+                    sys.stderr.write("{0} is not running\n".format(self.name))
+                return
             # Run user function hook
             self.daemonStop()
             # Try killing the daemon process
-            while True:
-                os.kill(self.pid, signal.SIGTERM)
-                time.sleep(0.1)
+            os.kill(self.pid, self.signal)
+            self.pidDelete()
+            time.sleep(0.1)
 
         except OSError as err:
             e = str(err)
@@ -133,7 +143,7 @@ class simpleDaemon:
     def __fork(self, attempt):
         try:
             pid = os.fork()
-            if pid > 0:
+            if pid > 0:                         # PID>0  [I am your father]
                 sys.exit(0)
         except OSError as err:
             sys.stderr.write('{0} daemon fork({1}) failed: {2}\n'.format(self.name, attempt, err))
@@ -157,7 +167,7 @@ class simpleDaemon:
         si = open(os.devnull, 'r')
         so = open(os.devnull, 'a+')
         se = open(os.devnull, 'a+')
-        os.dup2(si.fileno(), sys.stdin.fileno() )
+        os.dup2(si.fileno(), sys.stdin.fileno())
         os.dup2(so.fileno(), sys.stdout.fileno())
         os.dup2(se.fileno(), sys.stderr.fileno())
 
