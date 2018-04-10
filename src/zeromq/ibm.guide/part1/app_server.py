@@ -54,7 +54,7 @@ class AppServer(object):
 
 
     def on_recv(self, msg):
-        identity = msg[0]
+        identity = msg[0]           # This contains client id (socket handle), use to reply it back
         self.client_identities[identity] = datetime.utcnow()
         msg_type = msg[1]
         print("Received message of type %s from client ID %s!" % (msg_type, identity))
