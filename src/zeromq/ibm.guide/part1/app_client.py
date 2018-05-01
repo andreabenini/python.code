@@ -55,8 +55,8 @@ class AppClient(object):
         except KeyboardInterrupt:
             print("\n\nCtrl+C detected\n")
         except Exception as E:
-            print("WTF ! Error detected")
-            print(E)
+            print("Error detected")
+            print(str(E))
         finally:
             self.disconnect()
 
