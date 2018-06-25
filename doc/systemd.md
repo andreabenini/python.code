@@ -3,20 +3,22 @@ For example something named `/etc/systemd/system/uwsgi.service` where you can wr
 ```
 [Unit]
 Description=uWSGI instance to serve myapp
-After=syslog.target
+After=network.target
 
 [Service]
-ExecStart=/root/uwsgi/uwsgi --ini /etc/uwsgi/emperor.ini
+User=nginx
+Group=nginx
+ExecStart=/usr/bin/uwsgi --ini /etc/uwsgi/emperor.ini --logto /tmp/whatever/fileupload.log
 # VirtualEnv stuff, when needed
 # ExecStartPre=-/usr/bin/bash -c 'mkdir -p /run/uwsgi; chown user:nginx /run/uwsgi'
 # ExecStart=/usr/bin/bash -c 'cd /home/user/myapp; source myappenv/bin/activate; uwsgi --ini myapp.ini'
-
-# These options require systemd version 211 or newer
-RuntimeDirectory=uwsgi
+# ExecStop=/something/to/execute/myservice stop
+# ExecReload=/something/to/execute/myservice reload_config
 Restart=always
+# Restart=on-failure
+RestartSec=5s
 KillSignal=SIGQUIT
 Type=notify
-StandardError=syslog
 NotifyAccess=all
 
 [Install]
