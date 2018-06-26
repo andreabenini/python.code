@@ -1,6 +1,8 @@
 # uwsgi installation on CentOS/RHEL machines
 Do not use repos for it, install uwsgi from pip, easy as that:
 ```
+/ # yum install gcc python-devel
+...
 / # pip3.4 install uwsgi
 Collecting uwsgi
   Downloading https://files.pythonhosted.org/packages/98/b2/19b34b20d22/uwsgi-2.0.17.tar.gz (798kB)
