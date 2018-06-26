@@ -1,4 +1,4 @@
-# pip3 installation
+# pip3 installation on RHEL or CentOS OSes
 Install python setup tools first
 ```
 / # rpm -qa |grep setuptools
