@@ -77,6 +77,7 @@ class simpleDaemon:
         self.pid = os.getpid()
         with open(self.pidfile, 'w+') as f:
             f.write(str(self.pid) + '\n')
+        os.chmod(self.pidfile, 0o640)
 
     # PID DELETE - Delete pid file
     def pidDelete(self):
