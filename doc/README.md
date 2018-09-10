@@ -5,6 +5,9 @@
 ## Multiprocessing / Multithreading
 - [Multithreading and Multiprocessing Tutorial](https://www.toptal.com/python/beginners-guide-to-concurrency-and-parallelism-in-python)
 
+## Modules Handling
+- `help("modules")` Show installed modules
+
 ## Various
 ### Quick and short tips
 - [http://sahandsaba.com/thirty-python-language-features-and-tricks-you-may-not-know.html](http://sahandsaba.com/thirty-python-language-features-and-tricks-you-may-not-know.html)
