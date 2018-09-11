@@ -1,3 +1,4 @@
+_credits for this source tree to https://slikts.github.io/js-equality-game/_
 # The Algorithms - Python <!-- [![Build Status](https://travis-ci.org/TheAlgorithms/Python.svg)](https://travis-ci.org/TheAlgorithms/Python) -->
 
 ### All algorithms implemented in Python (for education)
