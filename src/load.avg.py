@@ -10,7 +10,7 @@ try:
     while True:
         with open('/proc/loadavg', 'r') as myfile:
             data = myfile.read().split(' ', 4)
-            sys.stdout.write("\r{0} {1} {2}".format(data[0], data[1], data[2]))
+            sys.stdout.write("\033[K{0} {1} {2}\r".format(data[0], data[1], data[2]))
         sys.stdout.flush()
         time.sleep(1)
 except:
