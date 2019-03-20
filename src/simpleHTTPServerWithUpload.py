@@ -1,20 +1,21 @@
 #!/usr/bin/env python3
 """Simple HTTP Server With Upload.
 
-full credits to: https://gist.github.com/touilleMan/eb02ea40b93e52604938
 This module builds on BaseHTTPServer by implementing the standard GET
 and HEAD requests in a fairly straightforward manner.
+Original credits to    https://gist.github.com/UniIsland/3346170
 
-see original python2 version: https://gist.github.com/UniIsland/3346170
+@author   Ben
+@see      Slightly modified for easier usage
 """
  
- 
-__version__ = "0.1"
-__all__ = ["SimpleHTTPRequestHandler"]
-__author__ = "bones7456"
-__home_page__ = "http://li2z.cn/"
+__version__   = "0.1"
+__all__       = ["SimpleHTTPRequestHandler"]
+__author__    = "ben"
+__home_page__ = "http://localhost/"
  
 import os
+import sys
 import posixpath
 import http.server
 import urllib.request, urllib.parse, urllib.error
@@ -26,9 +27,7 @@ from io import BytesIO
  
  
 class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
- 
     """Simple HTTP request handler with GET/HEAD/POST commands.
-
     This serves files from the current directory and any of its
     subdirectories.  The MIME type for files is determined by
     calling the .guess_type() method. And can reveive file uploaded
@@ -36,9 +35,7 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
 
     The GET/HEAD/POST requests are identical except that the HEAD
     request omits the actual contents of the file.
-
     """
- 
     server_version = "SimpleHTTPWithUpload/" + __version__
  
     def do_GET(self):
@@ -69,8 +66,8 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
             f.write(b"<strong>Failed:</strong>")
         f.write(info.encode())
         f.write(("<br><a href=\"%s\">back</a>" % self.headers['referer']).encode())
-        f.write(b"<hr><small>Powerd By: bones7456, check new version at ")
-        f.write(b"<a href=\"http://li2z.cn/?s=SimpleHTTPServerWithUpload\">")
+        f.write(b"<hr><small>Powerd By: %s, check new version at " % __author__)
+        f.write(b"<a href=\"%s?s=SimpleHTTPServerWithUpload\">" % __home_page__)
         f.write(b"here</a>.</small></body>\n</html>\n")
         length = f.tell()
         f.seek(0)
@@ -127,14 +124,12 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
  
     def send_head(self):
         """Common code for GET and HEAD commands.
-
         This sends the response code and MIME headers.
 
         Return value is either a file object (which has to be copied
         to the outputfile by the caller unless the command was HEAD,
         and must be closed by the caller under all circumstances), or
         None, in which case the caller has nothing further to do.
-
         """
         path = self.translate_path(self.path)
         f = None
@@ -175,7 +170,6 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
         Return value is either a file object, or None (indicating an
         error).  In either case, the headers are sent, making the
         interface the same as for send_head().
-
         """
         try:
             list = os.listdir(path)
@@ -218,9 +212,7 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
         """Translate a /-separated PATH to the local filename syntax.
 
         Components that mean special things to the local file system
-        (e.g. drive or directory names) are ignored.  (XXX They should
-        probably be diagnosed.)
-
+        (e.g. drive or directory names) are ignored.  (XXX They should probably be diagnosed)
         """
         # abandon query parameters
         path = path.split('?',1)[0]
@@ -248,7 +240,6 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
         the block size or perhaps to replace newlines by CRLF
         -- note however that this the default server uses this
         to copy binary data as well.
-
         """
         shutil.copyfileobj(source, outputfile)
  
@@ -262,9 +253,8 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
 
         The default implementation looks the file's extension
         up in the table self.extensions_map, using application/octet-stream
-        as a default; however it would be permissible (if
-        slow) to look inside the data to make a better guess.
-
+        as a default; however it would be permissible (if slow)
+        to look inside the data to make a better guess.
         """
  
         base, ext = posixpath.splitext(path)
@@ -284,12 +274,17 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
         '.py': 'text/plain',
         '.c': 'text/plain',
         '.h': 'text/plain',
-        })
+    })
  
  
-def test(HandlerClass = SimpleHTTPRequestHandler,
-         ServerClass = http.server.HTTPServer):
-    http.server.test(HandlerClass, ServerClass)
- 
+def test(HandlerClass=SimpleHTTPRequestHandler, ServerClass=http.server.HTTPServer, tcpPort=8080):
+    http.server.test(HandlerClass, ServerClass, port=tcpPort)
+
 if __name__ == '__main__':
-    test()
+    tcpPort = 8080
+    if len(sys.argv) > 1:
+        tcpPort = int(sys.argv[1])
+    print('\nStarting TCP Server on port {}.\n'.format(tcpPort))
+    print("Server:   {} <port>                 To specify listening port on startup".format(sys.argv[0]))
+    print("Client:   'curl -F \"file=@FILEtoUPLOAD\" http://localhost/'    to upload files\n")
+    test(tcpPort=tcpPort)
