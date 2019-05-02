@@ -22,4 +22,4 @@ Finished processing dependencies for pip
 
 **NOTE:**
 
-EPEL Repository must be enabled before these operations
+EPEL Repository must be enabled for these operations
