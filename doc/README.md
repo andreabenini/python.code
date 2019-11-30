@@ -9,5 +9,9 @@
 - `help("modules")` Show installed modules
 
 ## Various
+
+### separate functions of class into multiple files
+- https://stackoverflow.com/questions/47561840/python-how-can-i-separate-functions-of-class-into-multiple-files
+
 ### Quick and short tips
 - [http://sahandsaba.com/thirty-python-language-features-and-tricks-you-may-not-know.html](http://sahandsaba.com/thirty-python-language-features-and-tricks-you-may-not-know.html)
