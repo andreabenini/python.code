@@ -1,4 +1,4 @@
-```
+# Get system uptime
 def uptimeGet(self):
     try:
         with open("/proc/uptime", "r") as f:
@@ -15,5 +15,3 @@ def uptimeGet(self):
         return "{}d, {}h, {}m, {}s".format(days, hours, minutes, seconds)
     except Exception:
         return ""
-
-```
