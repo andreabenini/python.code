@@ -23,3 +23,20 @@ Finished processing dependencies for pip
 **NOTE:**
 
 EPEL Repository must be enabled for these operations
+
+# pip3 install cryptography
+To use and install cryptography module you must have these installed
+```
+openssl
+libffi | ffi
+libffi-devel (if any)
+```
+When you're still having problems inside your virtual env you might use this hack:
+```
+source bin/activate
+pip install --upgrade pip
+pip install wheel
+pip install cffi
+pip install cryptography
+```
+Tested on Linux Arch (arm on RPi)
