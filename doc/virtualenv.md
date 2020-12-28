@@ -54,3 +54,27 @@ source ./projectFolder/bin/activate
 . ./projectFolder/script.sh
 ```
 the leading `.` **is important**.
+
+
+# Troubleshooting
+## No module named 'pip'
+When you upgrade system wide python environment you may have troubles inside your virtualenv installation, you can still enter it but sometimes
+you may face something like:
+```sh
+(myvirtualenv) ~ $ pip
+Traceback (most recent call last):
+  File "/my/env/home/bin/pip3", line 5, in <module>
+    from pip._internal.cli.main import main
+ModuleNotFoundError: No module named 'pip'
+```
+and even classic upgrade won't solve it
+```sh
+(myvirtualenv) ~ $ python -m pip install --upgrade pip
+/my/env/home/bin/python: No module named pip
+```
+A clean solution to it might be:
+- `deactivate` virtual env
+- remove (_or rename_) pyvenv.cfg file inside your virtual env, if any
+- `source <yourenv>/bin/activate` to enter it again
+- `python -m pip install --upgrade pip` again to solve the venv environment
+...now it's time to upgrade remaining packages in your VirtualEnv
