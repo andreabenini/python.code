@@ -23,7 +23,7 @@ class ServerDaemon(simpleDaemon):
         super().__init__(name, pidfile, stdin, stdout, stderr)
         self.basepath   = basepath
         if basepath == '' or basepath == '/' or basepath is None:
-            raise Exception("Path servizio " + name + " non valida")
+            raise Exception(name + ": Invalid path")
 
         # Constructor setup
         self.SERVICE = "System"
