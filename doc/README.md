@@ -10,11 +10,15 @@
 
 ## Various
 
-### separate functions of class into multiple files
-- https://stackoverflow.com/questions/47561840/python-how-can-i-separate-functions-of-class-into-multiple-files
+- Separate functions of class into multiple files  
+  https://stackoverflow.com/questions/47561840/python-how-can-i-separate-functions-of-class-into-multiple-files
+- Writing and unit testing a Python application to query the RPM database  
+  https://www.redhat.com/sysadmin/query-rpm-database-python  
+    - Command line handling with _ArgumentParser_
+    - Test unit with _unittest_
 
-### Quick and short tips
-- [http://sahandsaba.com/thirty-python-language-features-and-tricks-you-may-not-know.html](http://sahandsaba.com/thirty-python-language-features-and-tricks-you-may-not-know.html)
+- Quick and short tips  
+  [http://sahandsaba.com/thirty-python-language-features-and-tricks-you-may-not-know.html](http://sahandsaba.com/thirty-python-language-features-and-tricks-you-may-not-know.html)
 
 ## `python`, command not found
 You obviously need to install it before (...) but if you've already did it it might be a nice idea to RTFM

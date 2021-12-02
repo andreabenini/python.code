@@ -1,3 +1,6 @@
+
+![Logo](logo.png)
+
 # python.code
 Assorted python code, tests and basic modules
 - [doc](./doc) Various python docs
