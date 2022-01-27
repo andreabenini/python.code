@@ -72,9 +72,21 @@ and even classic upgrade won't solve it
 (myvirtualenv) ~ $ python -m pip install --upgrade pip
 /my/env/home/bin/python: No module named pip
 ```
-A clean solution to it might be:
+### **Solution [1]**:
 - `deactivate` virtual env
 - remove (_or rename_) pyvenv.cfg file inside your virtual env, if any
 - `source <yourenv>/bin/activate` to enter it again
 - `python -m pip install --upgrade pip` again to solve the venv environment
 ...now it's time to upgrade remaining packages in your VirtualEnv
+### **Solution [2]**:
+`python3 -m venv --upgrade <venvDir>`
+This _might_ wipe your installed packages or internal environment do **NOT**
+use it unless you're sure of what you're doing
+### **Solution [3]**:
+- `python -m venvDir --no-setuptools`
+- activate virtualenv `source ... activate`
+- download and run `get-pip.py` to manually install pip & setuptools in
+this virtualenv
+    - `curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py`
+    - `python3 get-pip.py --force-reinstall`
+- continue as normal
