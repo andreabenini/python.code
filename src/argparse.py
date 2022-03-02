@@ -1,6 +1,6 @@
-import argparse
-
+# Version 1: argparse
 # Really basic argparse example usage
+import argparse
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument( '-f', '--filename', type=str, default='myfile.conf', help='Some useful help message')
@@ -22,3 +22,17 @@ if __name__ == "__main__":
     # - args.command    [mandatory] it might be one of: [list,add,del]
     # - args.url        [mandatory when args.command is <add> or <del>, not available when args.command is <list> ]
     # - args.arg1, args.arg2 [mutually exclusive]
+
+
+# Version 2: optparse
+# Input parameters
+import optparse
+if __name__ == "__main__":
+    parser = optparse.OptionParser()
+    parser.add_option('-H', '--hostname', dest='hostname', default='my.own.host.name', help='can provide some hostname here')
+    parser.add_option('-u', '--username', dest='username', default='ben', help='default username')
+    parser.add_option('-p', '--password', dest='password', default='',    help='default password')
+    (options, _) = parser.parse_args()
+    if not options.hostname or not options.username:
+        parser.print_help()
+        sys.exit(1)
