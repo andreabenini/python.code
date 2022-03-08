@@ -1,6 +1,9 @@
 # Various methods for opening files:
 with open("filename.txt", "rt") as f:
     data_lines = f.readlines()
+with open("filename.txt", "rt", encoding='utf8') as f:
+    for line in f:
+        print(f">{line.strip()}<")
 
 # Open pipe for writing, non blocking
 def openAndWrite_NonBlocking():
