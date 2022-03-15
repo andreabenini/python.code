@@ -5,6 +5,10 @@
 ## Multiprocessing / Multithreading
 - [Multithreading and Multiprocessing Tutorial](https://www.toptal.com/python/beginners-guide-to-concurrency-and-parallelism-in-python)
 
+## Exceptions
+- https://docs.python.org/3/library/exceptions.html#exception-hierarchy  
+  Builtin exception names and hierarchy
+
 ## Modules Handling
 - `help("modules")` Show installed modules
 
