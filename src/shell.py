@@ -15,7 +15,20 @@ def ExecCommand(Command=[], DevNull=True):
 #     print('something went wrong (%s)' % ReturnCode)
 # else:
 #     print('Output: %s' % Output)
-        
+
+# Compact version of the above function
+def ExecCommand(Command=''):
+    result = os.popen(f"ls -la").read().encode()
+
+# Exec stdin pipe command
+def ExecStdinPipeCommand(Command):
+    myProcess = subprocess.Popen(['cat', '-'], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+    myProcess.stdin.write(bytes("Hello World\nSecond Line", encoding='UTF-8'))
+    output = myProcess.communicate()[0]
+    myProcess.stdin.close()
+    print(output)
+
+
 # Assorted filesystem functions
 shutil.rmtree(Dir, True)                # Recursive delete
 shutil.copytree(Template, Dir, True)    # Recursive copy
