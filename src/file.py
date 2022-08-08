@@ -1,6 +1,9 @@
 # Various methods for opening files:
+
+# Lazy, short and easy method
 with open("filename.txt", "rt") as f:
     data_lines = f.readlines()
+# Use this one on large files
 with open("filename.txt", "rt", encoding='utf8') as f:
     for line in f:
         print(f">{line.strip()}<")
