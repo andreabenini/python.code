@@ -5,6 +5,9 @@
 ## Multiprocessing / Multithreading
 - [Multithreading and Multiprocessing Tutorial](https://www.toptal.com/python/beginners-guide-to-concurrency-and-parallelism-in-python)
 
+## TCP, Sockets, Select
+- [multiple sockets with select()](https://steelkiwi.com/blog/working-tcp-sockets/)
+
 ## Exceptions
 - https://docs.python.org/3/library/exceptions.html#exception-hierarchy  
   Builtin exception names and hierarchy
