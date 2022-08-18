@@ -9,3 +9,6 @@ Somewhat similar to GTK but way more powerful, builtin designer is tricky but aw
 - Python3 + GTK+3 + Glade  
     barebone tutorial, a little bit undocumented but it works and it's rather simple  
     https://dev.to/moniquelive/python3-gtk-3-glade-templates-3-1n9j
+- Glade and Gtk.Builder  
+    Two interesting examples: with and without decorators for dynamically loading `.glade` files too
+    https://python-gtk-3-tutorial.readthedocs.io/en/latest/builder.html
