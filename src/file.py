@@ -44,3 +44,6 @@ with open("data.csv") as csv_file:
 import json
 json_dict = json.loads(json_formatted_string)
 json_formatted_string = json.dumps(json_dict)
+
+# pretty print a python dict or a json object
+print(json.dumps(pythonDict, sort_keys=True, indent=4))
