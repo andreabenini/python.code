@@ -28,3 +28,25 @@ Edit or adapt your script accordingly
 
 # Restart/Reload
 Reload your new configuration with `systemctl daemon-reload` and start/restart it with `systemctl start uwsgi`
+
+
+# VirtualEnv service file example
+```
+[Unit]
+Description=The Service Daemon
+# can use .service file dependencies too
+After=network-online.target
+
+[Service]
+Type=simple
+User=user
+Group=group
+WorkingDirectory=/opt/user/pythonenv
+Environment=PATH=/opt/user/pythonenv/bin:$PATH
+ExecStart=/opt/user/pythonenv/myservice
+Restart=on-failure
+RestartSec=30s
+
+[Install]
+WantedBy=multi-user.target
+```
