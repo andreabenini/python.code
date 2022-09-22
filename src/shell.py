@@ -27,6 +27,15 @@ def ExecStdinPipeCommand(Command):
     output = myProcess.communicate()[0]
     myProcess.stdin.close()
     print(output)
+    
+def subProcessCommand(command):
+    process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+    stdout, stderr = process.communicate()
+    if process.returncode == 0:
+        return True
+    print(f"stdout: {stdout.decode()}")
+    print(f"stderr: {stderr.decode()}")
+    return False
 
 
 # Assorted filesystem functions
