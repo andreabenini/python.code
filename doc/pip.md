@@ -41,9 +41,13 @@ pip install cryptography
 ```
 Tested on Linux Arch (arm on RPi)
 
-# pip install package from github
-As simple as:
+# pip install packages from other sources
+github or similar git repo (https)
 ```sh
 #   cmd     git |---        Repository base URL         ---| branch
 pip install git+https://github.com/jay-g-mehta/pydhcpdparser@master
+```
+Local drive install
+```
+pip install ~/my/path/to/project/
 ```
