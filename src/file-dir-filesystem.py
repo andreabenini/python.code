@@ -23,7 +23,16 @@ def openAndWrite_NonBlocking():
     except Exception as e:
         print("ERROR: {}".format(str(e)))
 
-        
+
+# Directory handling
+import os
+os.chdir('./workdir')
+for file in os.listdir():
+    print(file)
+    if file.endswith(('.tmp')) or (file.startswith(("tmp_")) and file.endswith((“.png”, “.jpg”)):):
+        os.remove(file)
+
+
 # Object, serialization, json and so on...
 
 # Save python object to file
