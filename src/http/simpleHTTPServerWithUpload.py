@@ -74,7 +74,7 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
     def deal_post_data(self):
         httpheader = self.headers.as_string().strip().splitlines()
         print('\n'+'\n'.join([f'< {i}' for i in httpheader]) )
-        print(f"<  {self.headers['content-type']}")
+        print(f"- Content-Type: {self.headers['content-type']}")
 
         content_type = self.headers['content-type']
         if not content_type:
@@ -82,7 +82,7 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
         if len(content_type.split('=')) > 1:
             boundary = content_type.split("=")[1].encode()
         else:
-            print("! No boundary found in content type")
+            print("! No 'boundary' found in content type")
             boundary = b''
         remainbytes = int(self.headers['content-length'])
         line = self.rfile.readline()
