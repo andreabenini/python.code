@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 #
 # Simple HTTP Server With Upload.
 #
@@ -23,10 +23,8 @@ from   io import BytesIO
 
 # Simple HTTP request handler with GET/HEAD/POST commands.
 # This serves files from the current directory and any of its subdirectories.
-# The MIME type for files is determined by calling the .guess_type() method.
-# And can reveive file uploaded by client.
-# The GET/HEAD/POST requests are identical except that the HEAD
-# request omits the actual contents of the file.
+# The MIME type for files is determined by calling the .guess_type() method and can reveive file uploaded by client.
+# The GET/HEAD/POST requests are identical except that the HEAD request omits the actual contents of the file.
 class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
     server_version = "SimpleHTTPWithUpload/" + __version__
  
@@ -52,13 +50,13 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
         r, info = self.deal_post_data()
         print(f'- {r} {info}  [Client:{self.client_address}]')
         f = BytesIO()
-        f.write(b'<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">')
-        f.write(b"\n<html>\n  <head><title>Upload Result Page</title></head>\n")
-        f.write(b"  <body>\n    <h2>Upload Result Page</h2><hr>\n    ")
+        f.write('<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">'.encode())
+        f.write("\n<html>\n  <head><title>Upload Result Page</title></head>\n".encode())
+        f.write("  <body>\n    <h2>Upload Result Page</h2><hr>\n    ".encode())
         if r:
-            f.write(b"<strong>SUCCESS</strong><br>")
+            f.write("<strong>SUCCESS</strong><br>".encode())
         else:
-            f.write(b"<strong>FAILED</strong><br>")
+            f.write("<strong>FAILED</strong><br>".encode())
         f.write("\n    ".encode()+info.encode())
         f.write(f"<br><a href=\"{self.headers['referer']}\">back</a>".encode())
         f.write(f"<hr><small>{__author__}, check new version at <a href=\"{__home_page__}?s=SimpleHTTPServerWithUpload\">here</a>.</small>\n".encode())
@@ -76,11 +74,16 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
     def deal_post_data(self):
         httpheader = self.headers.as_string().strip().splitlines()
         print('\n'+'\n'.join([f'< {i}' for i in httpheader]) )
+        print(f"<  {self.headers['content-type']}")
 
         content_type = self.headers['content-type']
         if not content_type:
             return (False, "Content-Type header doesn't contain boundary")
-        boundary = content_type.split("=")[1].encode()
+        if len(content_type.split('=')) > 1:
+            boundary = content_type.split("=")[1].encode()
+        else:
+            print("! No boundary found in content type")
+            boundary = b''
         remainbytes = int(self.headers['content-length'])
         line = self.rfile.readline()
         remainbytes -= len(line)
