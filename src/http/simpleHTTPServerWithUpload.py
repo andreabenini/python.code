@@ -64,7 +64,7 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
         length = f.tell()
         f.seek(0)
         self.send_response(200)
-        self.send_header("Content-type", "text/html")
+        self.send_header("Content-Type", "text/html")
         self.send_header("Content-Length", str(length))
         self.end_headers()
         if f:
@@ -76,6 +76,8 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
         print('\n'+'\n'.join([f'< {i}' for i in httpheader]) )
         print(f"- Content-Type: {self.headers['content-type']}")
 
+        # Detecting 'Content-Type'. If boundary separator '=' is missing from multipart/form-data upload might be a real mess,
+        # it should always be something like "Content-Type: multipart/form-data; boundary=------------------------2cb079591d06d033"
         content_type = self.headers['content-type']
         if not content_type:
             return (False, "Content-Type header doesn't contain boundary")
@@ -84,6 +86,7 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
         else:
             print("! No 'boundary' found in content type")
             boundary = b''
+
         remainbytes = int(self.headers['content-length'])
         line = self.rfile.readline()
         remainbytes -= len(line)
@@ -156,7 +159,7 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
             self.send_error(404, "File not found")
             return None
         self.send_response(200)
-        self.send_header("Content-type", ctype)
+        self.send_header("Content-Type", ctype)
         fs = os.fstat(f.fileno())
         self.send_header("Content-Length", str(fs[6]))
         self.send_header("Last-Modified", self.date_time_string(fs.st_mtime))
@@ -201,7 +204,7 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
         length = f.tell()
         f.seek(0)
         self.send_response(200)
-        self.send_header("Content-type", "text/html")
+        self.send_header("Content-Type", "text/html")
         self.send_header("Content-Length", str(length))
         self.end_headers()
         return f
