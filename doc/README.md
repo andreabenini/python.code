@@ -1,3 +1,7 @@
+# Docs/Links
+- Impressive list of algorithms, all nicely implemented in python, not just for interviews but also for real usage case scenarios.  
+  https://github.com/TheAlgorithms/Python
+
 ## Compile
 - [PSYCO Compiler](http://psyco.sourceforge.net/introduction.html)
 - [Convert python code to ANSI C and compile (cpython)](https://medium.com/@xpl/protecting-python-sources-using-cython-dcd940bb188e)
