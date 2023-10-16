@@ -34,3 +34,9 @@ class DerivedClass(BaseClass):
 LoggerSetup()
 B = BaseClass()
 D = DerivedClass()
+
+
+
+# Debug, quick and dirty for tests, useful for a 5min debug on simple scripts
+logging.basicConfig(filename='/tmp/debug.log', level=logging.debug)
+logging.debug("Something to write in the log file")
