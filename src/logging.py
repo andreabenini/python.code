@@ -38,5 +38,5 @@ D = DerivedClass()
 
 
 # Debug, quick and dirty for tests, useful for a 5min debug on simple scripts
-logging.basicConfig(filename='/tmp/debug.log', level=logging.debug)
+logging.basicConfig(filename='/tmp/debug.log', level=logging.DEBUG)
 logging.debug("Something to write in the log file")
