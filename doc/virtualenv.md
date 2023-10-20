@@ -37,6 +37,11 @@ source projectFolder/bin/activate
 deactivate
 ```
 
+### Upgrade
+```sh
+python -m venv --upgrade [virtualEnvDirectory]
+```
+
 ### Execute an python script in a virtualenv
 You basically need to activate the environment, execute the script and deactivate the environment at the end.
 There're these options available:
