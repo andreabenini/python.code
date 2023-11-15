@@ -18,6 +18,7 @@
 
 ## Modules Handling
 - `help("modules")` Show installed modules
+- Handy cli reference: `python -c "help('modules')"`
 
 ## Various
 
