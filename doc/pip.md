@@ -52,6 +52,13 @@ Local drive install
 pip install ~/my/path/to/project/
 ```
 
+# pip clear environment
+**NOTE:** Don't do this unless you know what you are doing.  
+To clear/uninstall all pip packages in a VirtualEnvironment you can basically use the freeze+xargs magic combo, like:
+```sh
+pip freeze | xargs pip uninstall -y
+```
+
 
 ---
 
