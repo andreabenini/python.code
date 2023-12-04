@@ -43,5 +43,7 @@ You obviously need to install it before (...) but if you've already did it it mi
 man unversioned-python
 # as you can see from there it might be nice to issue something like:
 alternatives --set python /usr/bin/python3
+# or:
+update-alternatives --install /usr/bin/python python /usr/bin/python3 1
 # your mileage might vary
 ```
