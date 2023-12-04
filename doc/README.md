@@ -42,8 +42,10 @@ You obviously need to install it before (...) but if you've already did it it mi
 ```sh
 man unversioned-python
 # as you can see from there it might be nice to issue something like:
+# RHEL, CentOS, Rocky, Arch
 alternatives --set python /usr/bin/python3
-# or:
+# SUSE
+zypper install update-alternatives
 update-alternatives --install /usr/bin/python python /usr/bin/python3 1
 # your mileage might vary
 ```
