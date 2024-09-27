@@ -38,8 +38,18 @@ deactivate
 ```
 
 ### Upgrade
+To upgrade a python environment you just need to:
 ```sh
 python -m venv --upgrade [virtualEnvDirectory]
+```
+To cleanup the project also don't forget to:
+```sh
+# From ./bin directory
+rm bin/python3.xx
+# From ./include directory
+rm -rf include/python3.xx
+# From ./lib directory
+rm -rf lib/python3.xx
 ```
 
 ### Execute an python script in a virtualenv
