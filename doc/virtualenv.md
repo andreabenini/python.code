@@ -42,9 +42,16 @@ To upgrade a python environment you just need to:
 ```sh
 python -m venv --upgrade [virtualEnvDirectory]
 ```
+It's highly suggested to have a `requirements.txt` file with all virtualenv package requirements in order to
+provide a smooth update process. When it's provided you just simply need to use it to update them all through:
+```sh
+pip install -r requirements.txt
+```
+
 To cleanup the project also don't forget to:
 ```sh
 # From ./bin directory
+rm bin/pip3.xx
 rm bin/python3.xx
 # From ./include directory
 rm -rf include/python3.xx
