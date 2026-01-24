@@ -37,13 +37,23 @@ source projectFolder/bin/activate
 deactivate
 ```
 
-### Upgrade
-To upgrade a python environment you just need to:
-```sh
-python -m venv --upgrade [virtualEnvDirectory]
-```
-It's highly suggested to have a `requirements.txt` file with all virtualenv package requirements in order to
-provide a smooth update process. When it's provided you just simply need to use it to update them all through:
+# Upgrades
+- Minor patches updates.  
+  To upgrade a python environment when minor patches are applied it's always better to:
+  ```sh
+  python -m venv --upgrade [virtualEnvDirectory]
+  ```
+  **NOTE:** The `--upgrade` flag is primarily designed to be used when the Python binary has been updated
+  in place (e.g., a minor patch from `3.10.1` to `3.10.2`) but the directory structure remains the same.  
+- Minor or major version updates.  
+  Every update should be taken by destroying the venv and recreate it back again from the ground up and
+  later reapply the `requirements.txt` related to that environment. When `requirements.txt` file is not
+  available _(poor design choice)_ it might be somehow created with `pip freeze > requirements.txt` if
+  older python and pip binaries are still available in the **venv**.
+
+It's **highly** suggested to have a `requirements.txt` file with all virtualenv package requirements in
+order to provide a smooth update process. When it's provided you just simply need to use it to update
+them all through:
 ```sh
 pip install -r requirements.txt
 ```
