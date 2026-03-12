@@ -2,17 +2,17 @@
 Virtualenv is a tool to create isolated Python environments. Virtualenv creates a folder which contains
 all the necessary executables to use the packages that a Python project would need.
 ### Installation
-```
+```sh
 pip3 install virtualenv
 # pip install virtualenv
 ```
 ### Test
-```
+```sh
 virtualenv --version
 ```
 ### Creation
 Create a virtual environment for a project
-```
+```sh
 virtualenv projectFolder
 # Basically the same of:
 #    - mkdir projectFolder
@@ -20,20 +20,23 @@ virtualenv projectFolder
 #    - virtualenv .
 ```
 **python3 creation (from official doc)**, that's the suggested creation command for python3
-```
+```sh
 python3 -m venv projectFolder
+
+# You can also add a friendly prompt too
+python3 -m venv --prompt "Your venv prompt" projectFolder
 ```
 You can also use the Python interpreter of your choice (like python2.7)
-```
+```sh
 virtualenv -p /usr/bin/python2.7 projectFolder
 ```
 ### Activation
 To begin using the virtual environment, it needs to be activated
-```
+```sh
 source projectFolder/bin/activate
 ```
 ### Deactivation
-```
+```sh
 deactivate
 ```
 
